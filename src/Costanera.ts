@@ -1,7 +1,7 @@
 // /// <reference path="../tsDefinitions/phaser.d.ts" />
 import {Personaje} from './Personaje'
 import {Basurero} from './Basurero'
-
+import {Ball} from './Ball'
 export class Costanera
 {
 	game:Phaser.Game;
@@ -14,10 +14,18 @@ export class Costanera
 	saltarBtn:Phaser.Key;
 	facing: string;
 	emitter: Phaser.Particles.Arcade.Emitter;
-	
-
+	ball: Ball;
+	emitterball: Phaser.Particles.Arcade.Emitter;
 //--------------------setters y getters --------------------------------------
-	setGame(game: Phaser.Game ){
+setBall(value:Ball){
+	this.ball = value;
+}
+getBall():Ball{
+	return this.ball;
+}
+
+
+setGame(game: Phaser.Game ){
 		this.game = game;
 	}
 
@@ -94,9 +102,10 @@ export class Costanera
 	}
 
 	getEmitter(){
-		return this.emitter;
+		return this.emitter , this.emitterball;
+		
 	}
-
+	
 
 
 
@@ -133,7 +142,9 @@ export class Costanera
 			getEmitter: this.getEmitter,
 			setEmitter: this.setEmitter,
 			collisionHandler: this.collisionHandler,
-			listener: this.listener
+			listener: this.listener,
+			setBall: this.setBall,
+			getBall: this.getBall,
 		} ));
 	}
 	
@@ -142,6 +153,7 @@ export class Costanera
 		// add our logo image to the assets class under the
 		// key 'logo'. We're also setting the background colour
 		// so it's the same as the background colour in the image
+		this.getGame().load.image("ball", "assets/ball.png");
 		this.getGame().load.image('basurero', 'assets/basurero.png');
 		this.getGame().load.image('bonus', 'assets/hamburguesa.png');
 		this.getGame().load.spritesheet('player', 'sprites/dude.png', 32, 48);
@@ -191,13 +203,18 @@ export class Costanera
 		//Basurero
 		this.setBasurero(this.getGame().add.sprite(300, 50, 'basurero'));
 		this.getBasurero().name = 'basurero';
-	
+		//Ball
+		this.setBall(this.getGame().add.sprite(300,50, "ball"));
+		this.getBall().name= "ball";
+		//physicsbasurero
 		this.getGame().physics.enable(this.getBasurero(), Phaser.Physics.ARCADE);
 		//  This adjusts the collision body size.
 		//  220x10 is the new width/height.
 		//  See the offset bounding box for another example.
 		this.getBasurero().body.setSize(10, 10, 0, 0);
-
+		//physicsball
+		this.getGame().physics.enable(this.getBall(), Phaser.Physics.ARCADE);
+		this.getBall().body.setSize(10, 10, 0, 0);
 		//bonus
 		var bonus = this.getGame().add.sprite(300, 50, 'bonus');
 		this.setBonus(bonus);
@@ -223,7 +240,16 @@ export class Costanera
 		var emitter = this.getGame().add.emitter(this.getGame().world.centerX, 5, 5);
 		this.setEmitter(emitter);
 		this.getEmitter().width = this.getGame().world.width;
-
+		
+		//emiter Ball
+		var emitterball =this.getGame().add.emitter(this.getGame().world.centerX, 5,5);
+		this.setEmitter(emitterball);
+		this.getEmitter().width = this.getGame().world.width;
+		this.getEmitter().makeParticles("ball",[0,1,2,3,4,5,6] ,7,true,true);
+		this.getEmitter().setYSpeed(100, 200);
+		this.getEmitter().setXSpeed(-5, 5);
+		this.getEmitter().start(false, 1600, 1, 0);
+		
 		this.getEmitter().makeParticles('basurero',null,1,true);
 		// emitter.minParticleScale = 0.1;
 		// emitter.maxParticleScale = 0.5;

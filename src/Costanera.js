@@ -101,7 +101,7 @@ var Costanera = (function () {
         // add our logo image to the assets class under the
         // key 'logo'. We're also setting the background colour
         // so it's the same as the background colour in the image
-        this.getGame().load.image('basurero', 'assets/basurero.png');
+        this.getGame().load.image('basurero', 'assets/bola1.png');
         this.getGame().load.image('bonus', 'assets/hamburguesa.png');
         this.getGame().load.spritesheet('player', 'sprites/dude.png', 32, 48);
         this.getGame().load.image('costanera', "assets/costanera.jpg");
