@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import {Bonus} from './Bonus'
 module JuegoCostanera {
     export class Fruta extends Bonus {
@@ -45,4 +46,10 @@ module JuegoCostanera {
             return this.fruta;
         }
     }
+=======
+import {Bonus} from './Bonus'
+
+export class Ball extends Bonus {
+    
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 }

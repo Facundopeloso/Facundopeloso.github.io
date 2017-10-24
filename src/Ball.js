@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+"use strict";
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -8,6 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+<<<<<<< HEAD
 // import {Bonus} from './Bonus'
 var JuegoCostanera;
 (function (JuegoCostanera) {
@@ -49,3 +54,15 @@ var JuegoCostanera;
     }(JuegoCostanera.Bonus));
     JuegoCostanera.Fruta = Fruta;
 })(JuegoCostanera || (JuegoCostanera = {}));
+=======
+Object.defineProperty(exports, "__esModule", { value: true });
+var Bonus_1 = require("./Bonus");
+var Ball = (function (_super) {
+    __extends(Ball, _super);
+    function Ball() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Ball;
+}(Bonus_1.Bonus));
+exports.Ball = Ball;
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8

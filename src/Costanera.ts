@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /// <reference path="../tsDefinitions/phaser.d.ts" />
 /// <reference path="./Personaje.ts" />
 /// <reference path="./Boom.ts" />
@@ -23,6 +24,66 @@ module JuegoCostanera {
 		setGame(game: Phaser.Game ){
 			this.game = game;
 		}
+=======
+// /// <reference path="../tsDefinitions/phaser.d.ts" />
+import {Personaje} from './Personaje'
+import {Basurero} from './Basurero'
+import {Ball} from './Ball'
+export class Costanera
+{
+	game:Phaser.Game;
+	ancho: number;
+	alto:number;
+	personaje: Personaje;
+	basurero: Basurero;
+	bonus: Phaser.Sprite;
+	cursores:Phaser.CursorKeys;
+	saltarBtn:Phaser.Key;
+	facing: string;
+	emitter: Phaser.Particles.Arcade.Emitter;
+	ball: Ball;
+	emitterball: Phaser.Particles.Arcade.Emitter;
+//--------------------setters y getters --------------------------------------
+setBall(value:Ball){
+	this.ball = value;
+}
+getBall():Ball{
+	return this.ball;
+}
+
+
+setGame(game: Phaser.Game ){
+		this.game = game;
+	}
+
+	getGame (){
+		return this.game;
+	}
+
+	setAncho(ancho: number ){
+		this.ancho = ancho;
+	}
+
+	getAncho (){
+		return this.ancho;
+	}
+
+	setAlto(alto: number ){
+		this.alto = alto;
+	}
+
+	getAlto (){
+		return this.alto;
+	}
+
+	setPersonaje(personaje: Personaje ){
+		this.personaje = personaje;
+	}
+
+	getPersonaje ():Personaje{
+		return this.personaje;
+	}
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 
 		getGame (){
 			return this.game;
@@ -68,6 +129,7 @@ module JuegoCostanera {
 			return this.fruta;
 		}
 
+<<<<<<< HEAD
 		setCursores(cursores: Phaser.CursorKeys ){
 			this.cursores = cursores;
 		}
@@ -75,6 +137,13 @@ module JuegoCostanera {
 		getCursores (){
 			return this.cursores;
 		}
+=======
+	getEmitter(){
+		return this.emitter , this.emitterball;
+		
+	}
+	
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 
 		setSaltarBtn(saltarBtn: Phaser.Key ){
 			this.saltarBtn = saltarBtn;
@@ -84,23 +153,114 @@ module JuegoCostanera {
 			return this.saltarBtn;
 		}
 
+<<<<<<< HEAD
 		getDobleSalto(){
 			return this.dobleSalto
 		}
+=======
+	constructor(ancho: number,alto:number)
+	{
+		// create our phaser game
+		// 800 - width
+		// 600 - height
+		// Phaser.AUTO - determine the renderer automatically (canvas, webgl)
+		// 'content' - the name of the container to add our game to
+		// { preload:this.preload, create:this.create} - functions to call for our states
+		this.setGame(new Phaser.Game( ancho, alto, Phaser.CANVAS, 'content', { 
+			preload:this.preload, 
+			create:this.create, 
+			update: this.update,
+			setGame: this.setGame,
+			getGame: this.getGame,
+			setAncho: this.setAncho,
+			getAncho: this.getAncho,
+			setAlto: this.setAlto,
+			getAlto: this.getAlto,
+			setPersonaje: this.setPersonaje,
+			getPersonaje: this.getPersonaje,
+			setBasurero: this.setBasurero,
+			getBasurero: this.getBasurero,
+			setBonus: this.setBonus,
+			getBonus: this.getBonus,
+			setCursores: this.setCursores,
+			getCursores: this.getCursores,
+			setSaltarBtn: this.setSaltarBtn,
+			getSaltarBtn: this.getSaltarBtn,
+			getFacing: this.getFacing,
+			setFacing: this.setFacing,
+			getEmitter: this.getEmitter,
+			setEmitter: this.setEmitter,
+			collisionHandler: this.collisionHandler,
+			listener: this.listener,
+			setBall: this.setBall,
+			getBall: this.getBall,
+		} ));
+	}
+	
+	preload()
+	{ 
+		// add our logo image to the assets class under the
+		// key 'logo'. We're also setting the background colour
+		// so it's the same as the background colour in the image
+		this.getGame().load.image("ball", "assets/ball.png");
+		this.getGame().load.image('basurero', 'assets/basurero.png');
+		this.getGame().load.image('bonus', 'assets/hamburguesa.png');
+		this.getGame().load.spritesheet('player', 'sprites/dude.png', 32, 48);
+		this.getGame().load.image( 'costanera', "assets/costanera.jpg" );
+		
+		//Agregamos un comentario para probar subir cambios a GIT desde el editor
+		//hacemos un cambio en el archivo
+		
+	}
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 	
 		setDobleSalto(valor){
 			this.dobleSalto=valor;
 		}
 		
+<<<<<<< HEAD
 		setBajarBtn(valor: Phaser.Key ){
 			this.bajarBtn = valor;
 		}
+=======
+		this.getGame().physics.enable(this.getPersonaje(),Phaser.Physics.ARCADE);
+				
+		//Personaje
+		this.getPersonaje().body.collideWorldBounds = true;
+		this.getPersonaje().body.gravity.y = 500;
+		this.getPersonaje().body.setSize(20, 32, 5, 16);
+		this.getPersonaje().animations.add('left', [0, 1, 2, 3], 10, true);
+		this.getPersonaje().animations.add('turn', [4], 20, true);
+		this.getPersonaje().animations.add('right', [5, 6, 7, 8], 10, true);
+		this.setFacing('left');
+
+		//Basurero
+		this.setBasurero(this.getGame().add.sprite(300, 50, 'basurero'));
+		this.getBasurero().name = 'basurero';
+		//Ball
+		this.setBall(this.getGame().add.sprite(300,50, "ball"));
+		this.getBall().name= "ball";
+		//physicsbasurero
+		this.getGame().physics.enable(this.getBasurero(), Phaser.Physics.ARCADE);
+		//  This adjusts the collision body size.
+		//  220x10 is the new width/height.
+		//  See the offset bounding box for another example.
+		this.getBasurero().body.setSize(10, 10, 0, 0);
+		//physicsball
+		this.getGame().physics.enable(this.getBall(), Phaser.Physics.ARCADE);
+		this.getBall().body.setSize(10, 10, 0, 0);
+		//bonus
+		var bonus = this.getGame().add.sprite(300, 50, 'bonus');
+		this.setBonus(bonus);
+		bonus.name = 'bonus';
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 	
 		getBajarBtn (){
 			return this.bajarBtn;
 		}
 	
 
+<<<<<<< HEAD
 		getTextoPuntos(){
 			return this.textoPuntos;
 		}
@@ -108,6 +268,30 @@ module JuegoCostanera {
 		setTextoPuntos(value:Phaser.Text){
 			this.textoPuntos = value;
 		}
+=======
+		//emitter Basurero
+		var emitter = this.getGame().add.emitter(this.getGame().world.centerX, 5, 5);
+		this.setEmitter(emitter);
+		this.getEmitter().width = this.getGame().world.width;
+		
+		//emiter Ball
+		var emitterball =this.getGame().add.emitter(this.getGame().world.centerX, 5,5);
+		this.setEmitter(emitterball);
+		this.getEmitter().width = this.getGame().world.width;
+		this.getEmitter().makeParticles("ball",[0,1,2,3,4,5,6] ,7,true,true);
+		this.getEmitter().setYSpeed(100, 200);
+		this.getEmitter().setXSpeed(-5, 5);
+		this.getEmitter().start(false, 1600, 1, 0);
+		
+		this.getEmitter().makeParticles('basurero',null,1,true);
+		// emitter.minParticleScale = 0.1;
+		// emitter.maxParticleScale = 0.5;
+	
+		this.getEmitter().setYSpeed(100, 200);
+		this.getEmitter().setXSpeed(-5, 5);
+		
+		this.getEmitter().start(false, 1600, 1, 0);
+>>>>>>> bb88965c2d2816ede4b9b89056ea54c5102b7ff8
 
 		getTextoVidas(){
 			return this.textoVidas;
