@@ -8,47 +8,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-// import {Bonus} from './Bonus'
-var JuegoCostanera;
-(function (JuegoCostanera) {
-    var Fruta = /** @class */ (function (_super) {
-        __extends(Fruta, _super);
-        function Fruta(game, x, y, frame) {
-            var _this = _super.call(this, game, x, y, frame) || this;
-            var fruta = game.add.sprite(x, y, frame);
-            _this.setFruta(fruta);
-            _this.getFruta().name = frame;
-            game.physics.enable(_this.getFruta(), Phaser.Physics.ARCADE);
-            //  This adjusts the collision body size.
-            _this.getFruta().body.setSize(10, 10, 0, 0);
-            var emitter = game.add.emitter(game.world.centerX, game.world.top, 5);
-            _this.setEmitterFrutas(emitter);
-            _this.getEmitterFrutas().width = game.world.width;
-            _this.getEmitterFrutas().makeParticles(frame, null, 1, true);
-            _this.getEmitterFrutas().setYSpeed(-100, 500);
-            _this.getEmitterFrutas().setXSpeed(-5, 5);
-            _this.getEmitterFrutas().start(false, 1600, 1, 0);
-            //Para agregar el objeto al juego
-            game.add.existing(_this);
-            ;
-            return _this;
-        }
-        Fruta.prototype.setEmitterFrutas = function (value) {
-            this.emitterFrutas = value;
-        };
-        Fruta.prototype.getEmitterFrutas = function () {
-            return this.emitterFrutas;
-        };
-        Fruta.prototype.setFruta = function (value) {
-            this.fruta = value;
-        };
-        Fruta.prototype.getFruta = function () {
-            return this.fruta;
-        };
-        return Fruta;
-    }(JuegoCostanera.Bonus));
-    JuegoCostanera.Fruta = Fruta;
-})(JuegoCostanera || (JuegoCostanera = {}));
 // /// <reference path="../tsDefinitions/phaser.d.ts" />
 var JuegoCostanera;
 (function (JuegoCostanera) {
@@ -60,6 +19,54 @@ var JuegoCostanera;
         return Bonus;
     }(Phaser.Sprite));
     JuegoCostanera.Bonus = Bonus;
+})(JuegoCostanera || (JuegoCostanera = {}));
+// /// <reference path="../tsDefinitions/phaser.d.ts" />
+var JuegoCostanera;
+(function (JuegoCostanera) {
+    var Personaje = /** @class */ (function (_super) {
+        __extends(Personaje, _super);
+        function Personaje(game, x, y, frame) {
+            var _this = _super.call(this, game, x, y, frame) || this;
+            _this.height = 200;
+            _this.width = 100;
+            game.physics.enable(_this, Phaser.Physics.ARCADE);
+            _this.body.collideWorldBounds = true;
+            _this.body.gravity.y = 500;
+            _this.body.setSize(658, 1214);
+            _this.setOrientacion('right');
+            _this.setPuntos(0);
+            _this.setPuntosB(0);
+            _this.setVidas(3);
+            game.add.existing(_this);
+            return _this;
+        }
+        Personaje.prototype.getPuntosB = function () {
+            return this.puntosBonus;
+        };
+        Personaje.prototype.setPuntosB = function (value) {
+            this.puntosBonus = value;
+        };
+        Personaje.prototype.getPuntos = function () {
+            return this.puntos;
+        };
+        Personaje.prototype.setPuntos = function (value) {
+            this.puntos = value;
+        };
+        Personaje.prototype.getVidas = function () {
+            return this.vidas;
+        };
+        Personaje.prototype.setVidas = function (value) {
+            this.vidas = value;
+        };
+        Personaje.prototype.setOrientacion = function (value) {
+            this.orientacion = value;
+        };
+        Personaje.prototype.getOrientacion = function () {
+            return this.orientacion;
+        };
+        return Personaje;
+    }(Phaser.Sprite));
+    JuegoCostanera.Personaje = Personaje;
 })(JuegoCostanera || (JuegoCostanera = {}));
 // import {Bonus} from './Bonus'
 var JuegoCostanera;
@@ -101,58 +108,51 @@ var JuegoCostanera;
     }(JuegoCostanera.Bonus));
     JuegoCostanera.Piedra = Piedra;
 })(JuegoCostanera || (JuegoCostanera = {}));
-// /// <reference path="../tsDefinitions/phaser.d.ts" />
+// import {Bonus} from './Bonus'
 var JuegoCostanera;
 (function (JuegoCostanera) {
-    var Personaje = /** @class */ (function (_super) {
-        __extends(Personaje, _super);
-        function Personaje(game, x, y, frame) {
+    var Fruta = /** @class */ (function (_super) {
+        __extends(Fruta, _super);
+        function Fruta(game, x, y, frame) {
             var _this = _super.call(this, game, x, y, frame) || this;
-            _this.height = 200;
-            _this.width = 100;
-            game.physics.enable(_this, Phaser.Physics.ARCADE);
-            _this.body.collideWorldBounds = true;
-            _this.body.gravity.y = 500;
-            _this.body.setSize(1351, 2331);
-            _this.setOrientacion('right');
-            _this.setPuntos(0);
-            _this.setPuntosB(0);
-            _this.setVidas(3);
+            var fruta = game.add.sprite(x, y, frame);
+            _this.setFruta(fruta);
+            _this.getFruta().name = frame;
+            game.physics.enable(_this.getFruta(), Phaser.Physics.ARCADE);
+            //  This adjusts the collision body size.
+            _this.getFruta().body.setSize(10, 10, 0, 0);
+            var emitter = game.add.emitter(game.world.centerX, game.world.top, 5);
+            _this.setEmitterFrutas(emitter);
+            _this.getEmitterFrutas().width = game.world.width;
+            _this.getEmitterFrutas().makeParticles(frame, null, 1, true);
+            _this.getEmitterFrutas().setYSpeed(-100, 500);
+            _this.getEmitterFrutas().setXSpeed(-5, 5);
+            _this.getEmitterFrutas().start(false, 1600, 1, 0);
+            //Para agregar el objeto al juego
             game.add.existing(_this);
+            ;
             return _this;
         }
-        Personaje.prototype.getPuntosB = function () {
-            return this.puntosBonus;
+        Fruta.prototype.setEmitterFrutas = function (value) {
+            this.emitterFrutas = value;
         };
-        Personaje.prototype.setPuntosB = function (value) {
-            this.puntosBonus = value;
+        Fruta.prototype.getEmitterFrutas = function () {
+            return this.emitterFrutas;
         };
-        Personaje.prototype.getPuntos = function () {
-            return this.puntos;
+        Fruta.prototype.setFruta = function (value) {
+            this.fruta = value;
         };
-        Personaje.prototype.setPuntos = function (value) {
-            this.puntos = value;
+        Fruta.prototype.getFruta = function () {
+            return this.fruta;
         };
-        Personaje.prototype.getVidas = function () {
-            return this.vidas;
-        };
-        Personaje.prototype.setVidas = function (value) {
-            this.vidas = value;
-        };
-        Personaje.prototype.setOrientacion = function (value) {
-            this.orientacion = value;
-        };
-        Personaje.prototype.getOrientacion = function () {
-            return this.orientacion;
-        };
-        return Personaje;
-    }(Phaser.Sprite));
-    JuegoCostanera.Personaje = Personaje;
+        return Fruta;
+    }(JuegoCostanera.Bonus));
+    JuegoCostanera.Fruta = Fruta;
 })(JuegoCostanera || (JuegoCostanera = {}));
 /// <reference path="../tsDefinitions/phaser.d.ts" />
 /// <reference path="./Personaje.ts" />
-/// <reference path="./Boom.ts" />
-/// <reference path="./Ball.ts" />
+/// <reference path="./Piedra.ts" />
+/// <reference path="./Fruta.ts" />
 /// <reference path="./Bonus.ts" />
 var JuegoCostanera;
 (function (JuegoCostanera) {
@@ -179,7 +179,7 @@ var JuegoCostanera;
                 setSaltarBtn: this.setSaltarBtn,
                 getSaltarBtn: this.getSaltarBtn,
                 collisionPiedra: this.collisionPiedra,
-                collisionFruta: this.collisionFruta,
+                collisionBola: this.collisionBola,
                 listener: this.listener,
                 getDobleSalto: this.getDobleSalto,
                 setDobleSalto: this.setDobleSalto,
@@ -314,7 +314,7 @@ var JuegoCostanera;
         };
         Costanera.prototype.update = function () {
             this.getGame().physics.arcade.collide(this.getPiedra().getEmitterPiedras(), this.getPersonaje(), this.collisionPiedra, null, this);
-            this.getGame().physics.arcade.collide(this.getFruta().getEmitterFrutas(), this.getPersonaje(), this.collisionFruta, null, this);
+            this.getGame().physics.arcade.collide(this.getFruta().getEmitterFrutas(), this.getPersonaje(), this.collisionBola, null, this);
             this.getPersonaje().body.velocity.x = 0;
             if (this.getCursores().left.isDown) {
                 this.getPersonaje().body.velocity.x = -500;
@@ -375,7 +375,7 @@ var JuegoCostanera;
             this.getTextoVidas().text = "Vidas: " + this.getPersonaje().getVidas().toString();
             this.getPersonaje().setPuntosB(0);
         };
-        Costanera.prototype.collisionFruta = function (fruta, personaje) {
+        Costanera.prototype.collisionBola = function (bola, personaje) {
             personaje.kill();
             //  Increase the score
             this.getPersonaje().setPuntos(this.getPersonaje().getPuntos() + 20);

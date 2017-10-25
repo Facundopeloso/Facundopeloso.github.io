@@ -20,7 +20,7 @@ var JuegoCostanera;
             game.physics.enable(_this, Phaser.Physics.ARCADE);
             _this.body.collideWorldBounds = true;
             _this.body.gravity.y = 500;
-            _this.body.setSize(1351, 2331);
+            _this.body.setSize(658, 1214);
             _this.setOrientacion('right');
             _this.setPuntos(0);
             _this.setPuntosB(0);

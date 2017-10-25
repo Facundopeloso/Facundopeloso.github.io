@@ -15,7 +15,7 @@ module JuegoCostanera{
             game.physics.enable(this,Phaser.Physics.ARCADE);
             this.body.collideWorldBounds = true;
             this.body.gravity.y = 500;
-            this.body.setSize(1351, 2331);
+            this.body.setSize(658, 1214);
 
             this.setOrientacion('right');        
 
